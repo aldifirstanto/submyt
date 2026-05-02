@@ -37,3 +37,17 @@ export async function getProductByBarcode(barcode) {
     lastPurchase: lastPurchase ?? null
   };
 }
+
+export async function createProduct({ barcode, name = null, brand = null }) {
+  const { data: product, error } = await supabase
+    .from('products')
+    .insert({ barcode, name, brand })
+    .select('*')
+    .single();
+
+  if (error) {
+    throw error;
+  }
+
+  return product;
+}
