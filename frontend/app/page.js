@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import BarcodeScanner from '../components/BarcodeScanner';
 
 export default function HomePage() {
   const [barcode, setBarcode] = useState('');
@@ -8,12 +9,20 @@ export default function HomePage() {
   const [price, setPrice] = useState('');
   const [storeName, setStoreName] = useState('');
   const [message, setMessage] = useState('');
+  const [showScanner, setShowScanner] = useState(false);
 
-  async function handleSearch() {
+  async function handleSearch(searchBarcode = barcode) {
     setMessage('');
-    const response = await fetch(`http://localhost:3000/api/products/${barcode}`);
+    const response = await fetch(`http://localhost:3000/api/products/${searchBarcode}`);
     const data = await response.json();
     setProduct(data);
+  }
+
+
+  async function handleScan(code) {
+    setBarcode(code);
+    setShowScanner(false);
+    await handleSearch(code);
   }
 
   async function handleSavePurchase(event) {
@@ -60,10 +69,15 @@ export default function HomePage() {
           onChange={(event) => setBarcode(event.target.value)}
           placeholder="Barcode"
         />
-        <button type="button" onClick={handleSearch}>
+        <button type="button" onClick={() => handleSearch()}>
           Search
         </button>
+        <button type="button" onClick={() => setShowScanner(true)}>
+          Scan Barcode
+        </button>
       </div>
+
+      {showScanner && <BarcodeScanner onScan={handleScan} />}
 
       {product && (
         <section>
