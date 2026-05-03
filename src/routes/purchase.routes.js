@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { addProduct, fetchProductByBarcode } from '../controllers/productController.js';
-import { addPurchase } from '../controllers/purchaseController.js';
+import { addProduct, fetchProductByBarcode } from '../controllers/product.controller.js';
+import { addPurchase } from '../controllers/purchase.controller.js';
 
 const router = Router();
 
