@@ -47,8 +47,7 @@ export default function HomePage() {
     setMessage('Purchase saved');
     setPrice('');
     setStoreName('');
-
-    await handleSearch();  }
+  }
 
   return (
     <main>
