@@ -1,10 +1,9 @@
+import { Router } from 'express';
+import { addProduct, fetchProductByBarcode } from '../controllers/product.controller.js';
 
-import express from "express";
-import * as productController from "../controllers/product.controller.js";
+const router = Router();
 
-const router = express.Router();
-
-router.get("/:barcode", productController.fetchProductByBarcode);
-
+router.get('/:barcode', fetchProductByBarcode);
+router.post('/', addProduct);
 
 export default router;
