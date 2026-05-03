@@ -1,6 +1,6 @@
 import { createProduct, getProductByBarcode } from '../services/product.service.js';
 
-export async function getProductByBarcode(req, res, next) {
+export async function fetchProductByBarcode(req, res, next) {
   try {
     const { barcode } = req.params;
     const product = await getProductByBarcode(barcode);

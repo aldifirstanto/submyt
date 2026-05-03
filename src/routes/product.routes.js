@@ -4,6 +4,7 @@ import * as productController from "../controllers/product.controller.js";
 
 const router = express.Router();
 
-router.get("/:barcode", productController.getProductByBarcode);
+router.get("/:barcode", productController.fetchProductByBarcode);
+
 
 export default router;
